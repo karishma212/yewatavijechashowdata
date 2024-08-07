@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>विजेच्या जोडणीसाठी ना-हरकत स्वः घोषणापत्र</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+           box-sizing: border-box;
+           height: 842px;
+    width: 595px;
+    margin-left: auto;
+    margin-right: auto;
+           
+
+        }
+        .container {
+            width: 210mm;
+            height: 297mm;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20mm;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 1.5em;
+            text-decoration: underline;
+        }
+        .content p {
+            margin: 20px 0;
+            line-height: 1.6;
+            word-spacing: 10px;
+        }
+        .footer{
+            margin-top: 20px;
+        }
+        .content input {
+            outline: none;
+            border: none;
+            background-color: #fff;
+        }
+        .signature {
+            margin-top: 40px;
+        }
+        .signature p {
+            margin: 5px 0;
+            font-weight: bold;
+        }
+        .sign {
+            /* text-align: right;
+            margin-top: 40px; */
+            margin-left: 310px;
+            font-weight: bold;
+        }
+        
+        .print-button {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        @media (min-width: 600px) {
+    .header {
+        flex-direction:row;
+        justify-content: space-between;
+        text-align: center;
+    }
+}
+    </style>
+</head>
+<body onload="loadData()">
+    <div class="container">
+        <div class="header">
+            <h2>विजेच्या जोडणीसाठी ना-हरकत स्वः घोषणापत्र</h2>
+        </div>
+        <div class="content">
+            <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;<label>मी </label>
+                <input type="text" id="me" class="content " placeholder="--------------------------------------"> 
+                <label>श्री.</label>
+                <input type="text" id="shree" class="content" placeholder="------------------------------------------------------------------------------------------------------------------"><br>
+                <label>यांचा मुलगा / मुलगी वय</label>
+                <input type="text" id="age" class="content" placeholder="---------------------------------------------------------">
+                <label>वर्षे, आधार कार्ड क्रमांक</label>
+                <input type="text" id="adhar" class="content" placeholder="---------------------------------------------------------">
+                <label> व्यवसाय</label>
+                <input type="text" id="designation" class="content" placeholder="---------------------------------------------------------">
+               <label>मौजे</label>
+                <input type="text" id="address" class="content" placeholder="---------------------------------------------------------">
+                <label> रा. </label>
+                <input type="text" id="add" class="content" placeholder="---------------------------------------------------------">
+                <label> ता.</label>
+                <input type="text" id="tq" class="content" placeholder="---------------------------------------------------------"> 
+                <label> जि.</label>
+                <input type="text" id="dist" class="content" placeholder="---------------------------------------------------------">येथील रहिवाशी असून या द‌द्वारे घोषीत करतो/ करते कि, मला घरगुती व्यावसायिक/आ‌द्योगिक वापरासाठी वीज जोडणी आवश्यक असल्यामुळे वीज जोडणीसाठी माझी काहीही हरकत नाही.
+            </p>
+            <p>
+                &nbsp; &nbsp;&nbsp;&nbsp;वरील सर्व माहिती व समजुतीनुसार खरी आहे सादर माहिती खोटी आढळून आल्यास भारतीय दंड सहिता अन्वये आणि / किवा सबंधित काय‌द्यानुसार माझ्यावर खटला भरला जाईल व त्यानुसार मी शिक्षेस पात्र राहीन. तसेच स्वः घोषणापत्रा‌द्वारे मिळालेले सर्व लाभ सर्वकषरित्या काढून घेण्यात येतील याची मला पूर्ण जाणीव आहे
+                <br><br>&nbsp; &nbsp;&nbsp;&nbsp; करिता स्वःघोषणा पत्र लिहून देत आहे.
+            </p>
+        </div>
+        <div class="footer">
+            <div class="signature">
+                <div class="sign">
+                <p>अर्जदाराचे स्वाक्षरी :</p>
+                <p>अर्जदाराचे नाव : _______________</p></div>
+                 <br>
+                <p>ठिकाण : _________________</p>
+                <br>
+                <p>दिनांक : ___ / ___ / 20__</p>
+            </div>
+            <div class="print-button">
+                <button onclick="window.print()">Print</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function loadData() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            document.getElementById('me').value = urlParams.get('me') || '';
+            document.getElementById('shree').value = urlParams.get('shree') || '';
+            document.getElementById('age').value = urlParams.get('age') || '';
+            document.getElementById('adhar').value = urlParams.get('adhar') || '';
+            document.getElementById('designation').value = urlParams.get('designation') || '';
+            document.getElementById('address').value = urlParams.get('address') || '';
+            document.getElementById('add').value = urlParams.get('add') || '';
+            document.getElementById('tq').value = urlParams.get('tq') || '';
+            document.getElementById('dist').value = urlParams.get('dist') || '';
+        }
+
+        function printPage() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

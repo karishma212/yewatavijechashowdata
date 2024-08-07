@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>show Data</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .data-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+            overflow-x: auto;
+        }
+        
+        .data-box table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-box th,
+        .data-box td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        .data-box button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .approve {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .reject {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .show-users-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        #data-container {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="show-users-btn" onclick="fetchData()">Show User Details</button>
+    <div class="container" id="data-container">
+        <!-- User data boxes will be populated here -->
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxfcZshB0nRvvcnXR_DwB5OZoMCnWb1l8jZozraqJAyCk5gmluoG3tdazANU9zCC7I1SA/exec'; // Replace with your Google Apps Script web app URL
+
+        function fetchData() {
+            fetch(scriptURL)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'Success') {
+                        populateDataBoxes(data.data);
+                        document.getElementById('data-container').style.display = 'flex';
+                    } else {
+                        alert('Error fetching data: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Error fetching data: ' + error.message);
+                });
+        }
+
+        function populateDataBoxes(data) {
+            const dataContainer = document.getElementById('data-container');
+            dataContainer.innerHTML = '';
+
+            data.slice(1).forEach(row => {
+                let dataBox = document.createElement('div');
+                dataBox.className = 'data-box';
+
+                let table = document.createElement('table');
+                let tableBody = document.createElement('tbody');
+
+                const fields = [
+                    'me', 'shree', 'age','adhar', 'designation', 'address', 'add',
+                    'tq', 'dist'
+                ];
+
+                fields.forEach((field, index) => {
+                    let newRow = tableBody.insertRow();
+                    let labelCell = newRow.insertCell();
+                    labelCell.textContent = field + ':';
+                    let valueCell = newRow.insertCell();
+                    valueCell.textContent = row[index] || 'N/A';
+                });
+
+                table.appendChild(tableBody);
+
+                let approveButton = document.createElement('button');
+                approveButton.className = 'approve';
+                approveButton.textContent = 'Approve';
+                approveButton.onclick = () => handleAction('approve', row);
+
+                let rejectButton = document.createElement('button');
+                rejectButton.className = 'reject';
+                rejectButton.textContent = 'Reject';
+                rejectButton.onclick = () => handleAction('reject', row);
+
+                dataBox.appendChild(table);
+                dataBox.appendChild(approveButton);
+                dataBox.appendChild(rejectButton);
+
+                dataContainer.appendChild(dataBox);
+            });
+        }
+
+    //     function handleAction(action, data) {
+    //         if (action === 'approve') {
+    //             const queryString = new URLSearchParams({
+    //                 data: JSON.stringify(data)
+    //             }).toString();
+    //             window.location.href = `display.html?${queryString}`;
+    //         } else {
+    //     alert(`${action.charAt(0).toUpperCase() + action.slice(1)} action triggered for: ${data[5]}`); // Adjust index if needed
+    // }
+
+    function handleAction(action, data) {
+        if (action === 'approve') {
+            const fields = ['me', 'shree', 'age', 'adhar', 'designation', 'address', 'add', 'tq', 'dist'];
+            let queryString = fields.map((field, index) => `${field}=${encodeURIComponent(data[index])}`).join('&');
+            window.location.href = `display.html?${queryString}`;
+        } else {
+            alert(`${action.charAt(0).toUpperCase() + action.slice(1)} action triggered for: ${data[5]}`); // Adjust index if needed
+        }
+    }
+</script>
+</body>
+
+</html>
